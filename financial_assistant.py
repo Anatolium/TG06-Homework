@@ -1,11 +1,9 @@
 from aiogram import Bot, Dispatcher, F
-from aiogram.filters import CommandStart, Command
-from aiogram.types import Message, FSInputFile
+from aiogram.filters import Command
+from aiogram.types import Message
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import State, StatesGroup
-from aiogram.fsm.storage.memory import MemoryStorage
-from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.utils.keyboard import ReplyKeyboardBuilder, InlineKeyboardBuilder
+from aiogram.types import ReplyKeyboardMarkup, KeyboardButton
 import asyncio
 import requests
 import sqlite3
@@ -95,8 +93,8 @@ async def exchange_rates(message: Message):
 
         await message.answer(f"1 USD - {usd_to_rub:.2f} RUB\n"
                              f"1 EUR - {eur_to_rub:.2f} RUB")
-    except:
-        await message.answer("Произошла ошибка")
+    except requests.exceptions.RequestException as e:
+        await message.answer(f"Произошла ошибка {e}")
 
 
 @dp.message(F.text == "Советы по экономии")
