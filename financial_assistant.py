@@ -12,6 +12,7 @@ import logging
 
 from config import TOKEN
 
+# Financial_Assistant_TG06
 bot = Bot(token=TOKEN)
 dp = Dispatcher()
 
